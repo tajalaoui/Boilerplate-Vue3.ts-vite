@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite & ts-node server/app.ts",
+    "dev": "vite & ts-node server/server.ts",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "mongoose": "^6.3.0",
     "vue": "^3.2.25"
   },
   "devDependencies": {

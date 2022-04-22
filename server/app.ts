@@ -1,12 +1,14 @@
-import express from "express"
+import express, { Application } from "express"
+const app: Application = express()
+import bodyParser from "body-parser"
+import helmet from "helmet"
+import { RoutesV1 } from "./api/v1/routes/routes"
 
-const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(helmet)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use("/api", RoutesV1)
 
-app.get("/", (req, res) => {
-  return res.send("Hello world")
-})
-
-const port = process.env.PORT || 3000
-app.listen(port, (): void => {
-  console.log(`Server running on port ${port}`)
-})
+export default app
