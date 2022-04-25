@@ -3,6 +3,6 @@ import { UsersRoute } from "./user-route"
 
 const router: Router = Router()
 
-router.use("/", UsersRoute)
+router.use("/user", UsersRoute)
 
-export const RoutesV1: Router = router
+export const Routes: Router = router

@@ -8,14 +8,21 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "front": "vite",
-    "server": "ts-node-dev server/app.ts"
+    "server": "ts-node-dev server/server.ts"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jest": "^27.4.1",
+    "@types/mongoose": "^5.11.97",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
-    "mongoose": "^6.3.0",
+    "jest": "^27.5.1",
+    "mongoose": "^6.3.1",
+    "ts-jest": "^27.1.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {
