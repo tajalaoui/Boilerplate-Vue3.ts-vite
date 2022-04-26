@@ -6,7 +6,7 @@ async function createUser(input: IUser) {
   return User.create<IUser>(input)
 }
 
-async function findUser(query: FilterQuery<IUserDoc>, options: object = { lean: true }) {
+async function findUser(query: FilterQuery<IUserDoc>, options: object) {
   return User.findOne(query, null, options)
 }
 
