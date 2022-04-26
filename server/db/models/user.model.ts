@@ -1,46 +1,34 @@
-import mongoose from "mongoose"
+import mongoose, { Schema } from "mongoose"
 import bcrypt from "bcrypt"
+import { IUserDoc } from "../interfaces/user/IUser"
 
-export interface UserInput {
-  email: string
-  firstName: string
-  lastName: string
-  password: string
-}
-
-export interface UserDocument extends UserInput, mongoose.Document {
-  fullName: string
-  createdAt: Date
-  updatedAt: Date
-  comparePassword(candidatePassword: string): Promise<boolean>
-}
-
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: String,
-  password: {
-    type: String,
-    required: true,
-  },
-})
+  { timestamps: true }
+)
 
 userSchema.index({ email: 1 })
 
-// Virtual method
-userSchema.virtual("fullName").get(function (this: UserDocument) {
-  return `${this.firstName} ${this.lastName}`
-})
+// userSchema.virtual("fullName").get(function (this: IUserDoc) {
+//   return `${this.firstName} ${this.lastName}`
+// })
 
 // When the user registers
-userSchema.pre("save", async function (this: UserDocument, next) {
+userSchema.pre("save", async function (this: IUserDoc, next) {
   // only hash the password if it has been modified (or is new)
   if (!this.isModified("password")) return next()
 
@@ -58,9 +46,9 @@ userSchema.pre("save", async function (this: UserDocument, next) {
 // Compare a candidate password with the user's password
 userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
   // So we don't have to pass this into the interface method
-  const user = this as UserDocument
+  const user = this as IUserDoc
 
   return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
 }
 
-export default mongoose.model<UserDocument>("User", userSchema)
+export default mongoose.model<IUserDoc>("User", userSchema)

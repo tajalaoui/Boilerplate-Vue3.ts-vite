@@ -1,9 +1,11 @@
-import { NextFunction, Request, Response, Router } from "express"
+import { Request, Response, Router } from "express"
+import { createUser } from "../../db/controllers/user.controller"
 
 const router: Router = Router()
 
-router.get("/", (req: Request, res: Response) => {
-  res.send("Hello")
+router.get("/", async (req: Request, res: Response) => {
+  const query = await createUser({ email: "tajeddine.js@hotmail.com", username: "Tajeddine", password: "123" })
+  res.send(query)
 })
 
-export const UsersRoute: Router = router
+export const RUser: Router = router
