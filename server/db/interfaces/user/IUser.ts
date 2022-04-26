@@ -7,7 +7,6 @@ interface IUser {
 }
 
 interface IUserDoc extends IUser, Document {
-  // fullName: string
   createdAt: Date
   updatedAt: Date
   comparePassword(candidatePassword: string): Promise<boolean>

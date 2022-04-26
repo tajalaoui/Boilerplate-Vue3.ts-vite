@@ -23,10 +23,6 @@ const userSchema = new Schema(
 
 userSchema.index({ email: 1 })
 
-// userSchema.virtual("fullName").get(function (this: IUserDoc) {
-//   return `${this.firstName} ${this.lastName}`
-// })
-
 // When the user registers
 userSchema.pre("save", async function (this: IUserDoc, next) {
   // only hash the password if it has been modified (or is new)
